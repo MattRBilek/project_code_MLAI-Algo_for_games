@@ -14,7 +14,7 @@ def minimaxAlgo(side, board, flags, game, evaluate = exampleEval, maxDepth = Non
             temp = None
             tempMoveList = None
 
-            temp,tempMoveList,tempFlags = minimaxAlgo(newside, newboard, newflags, game, evaluate, maxDepth, depth - 1, alpha, beta)
+            temp,tempMoveList,tempFlags = minimaxAlgo(newside, newboard, newflags, game, evaluate, maxDepth, depth + 1, alpha, beta)
 
             if value == None or value * turnMult < temp * turnMult:
                 moveList = [move] + tempMoveList

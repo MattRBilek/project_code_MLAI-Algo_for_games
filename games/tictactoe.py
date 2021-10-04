@@ -55,7 +55,7 @@ class Game:
         
         # updating the display
         pg.display.update()
-        time.sleep(1)         
+        #time.sleep(1)         
         white = (255, 255, 255)        
         self.screen.fill(white)
         

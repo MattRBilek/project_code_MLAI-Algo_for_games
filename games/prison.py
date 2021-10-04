@@ -44,7 +44,7 @@ class Game:
         turn = False
         flags = {}
         running = True
-        numRounds = random.randint(1,2) * 20
+        numRounds = random.randint(1,2) * 100
         score = np.array([0,0])
         for i in range(numRounds):
             move = None
