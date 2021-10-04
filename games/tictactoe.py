@@ -5,14 +5,16 @@ from copy import copy, deepcopy
 leave this is not for you
 """
 class GameBoard:
-    def getMoves(turn, board, flags = None):
+    def getMoves(turn, board, flags):
+        if ("winX" in flags or "winO" in flags):
+            return []
         arr = []
         for i in range(9):
             if board[i] is None:
                 arr.append(i)
         return arr
-    def makeMove(move, turn, board, flags = None):
-        if not move in GameBoard.getMoves(turn, board):
+    def makeMove(move, turn, board, flags):
+        if not move in GameBoard.getMoves(turn, board,flags):
             return (turn,None,None)
         
         newBoard = deepcopy(board)
@@ -20,7 +22,7 @@ class GameBoard:
         newTurn = not turn
         newFlags = {}
         
-        if len(GameBoard.getMoves(newTurn, newBoard)) == 0:
+        if len(GameBoard.getMoves(newTurn, newBoard,flags)) == 0:
             newFlags["full"] = True
         
         for i in range(3):
@@ -45,13 +47,15 @@ class Game:
         self.height = 600
         
     def game_initiating_window(self):
+        if self.fps == 0:
+            return;
         self.screen = pg.display.set_mode((self.width, self.height), 0, 32)
         # displaying over the screen
         #self.screen.blit(initiating_window, (0, 0))
         
         # updating the display
         pg.display.update()
-        time.sleep(3)         
+        time.sleep(1)         
         white = (255, 255, 255)        
         self.screen.fill(white)
         
@@ -67,7 +71,7 @@ class Game:
     
     def draw(self,board):
         for i in range(9):
-            if not board[i] is None:
+            if not (board[i] is None):
                 y = int(i/3) * 200
                 x = int(i%3) * 200
                 pg.draw.rect(self.screen, (200,0,0) if board[i] == "X" else (0,0,200), (x, y, 200, 200))
@@ -78,25 +82,28 @@ class Game:
         flags = {}
         self.game_initiating_window()
         running = True
-        CLOCK = pg.time.Clock()
+        if not self.fps == 0:
+            CLOCK = pg.time.Clock()
         while(running):
-            for event in pg.event.get():
-                if event.type == pg.QUIT:
-                    pg.quit()
-                    return
+            if not self.fps == 0:
+                for event in pg.event.get():
+                    if event.type == pg.QUIT:
+                        pg.quit()
+                        return
             move = None
             if turn:
-                move = self.player1.makeMove(turn, deepcopy(board), flags)
+                move = self.player1.makeMove(turn, deepcopy(board), deepcopy(flags))
             else:
-                move = self.player0.makeMove(turn, deepcopy(board), flags)
+                move = self.player0.makeMove(turn, deepcopy(board), deepcopy(flags))
             
             turn, board, flags = GameBoard.makeMove(move,turn, board, flags)
             if "winX" in flags or "winO" in flags or "full" in flags:
                 running = False
             
-            self.draw(board)
-            pg.display.update()
-            CLOCK.tick(self.fps)
-        
-        pg.quit()
-        return
+            if not self.fps == 0:
+                self.draw(board)
+                pg.display.update()
+                CLOCK.tick(self.fps)
+        if not self.fps == 0:
+            pg.quit()
+        return [0.,1.] if "winO" in flags else [1.,0.] if "winX" in flags else [.5,.5]
