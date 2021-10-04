@@ -26,7 +26,7 @@ DOCS:
 				
 	guaranteed game function calls:
 		game.getMoves(self, turn, board, flags) - returns a list of possible moves
-		game.makeMove(self, move, turn, board, flags) - returns a new board with flags and turn
+		game.makeMove(self, move, turn, board, flags) - returns a new board with flags and turn after making some move
 	
 	required for your algorithms:
 		- class is called algorithm
@@ -55,18 +55,14 @@ games:
 
 easy:
 tic Tac Toe
-pong
+extended prison
 
 med:
 snake like game 2p
-image classification
+connect 4
 
 hard:
-pac man like game
-space invaders
-
-extermeme:
-
+pac-man like game
 spy party
 
 
