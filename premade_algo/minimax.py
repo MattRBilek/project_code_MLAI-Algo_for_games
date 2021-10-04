@@ -13,5 +13,5 @@ class Algorithm:
     def __init__(self, game):
         self.game = game
     def makeMove(self, turn, board, flags):
-        value, moves, moveTree = alg.minimaxAlgo(turn,board,flags,self.game, evaluate, 3) # for u will be 3
+        value, moves, moveTree = alg.minimaxAlgo(turn,board,flags,self.game, evaluate, None) # for 5 u will be 2
         return moves[0]
