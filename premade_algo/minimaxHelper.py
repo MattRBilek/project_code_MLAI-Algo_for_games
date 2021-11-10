@@ -4,7 +4,7 @@ def exampleEval(side, board, flags, depth = None):
 
 def minimaxAlgo(side, board, flags, game, evaluate = exampleEval, maxDepth = None, depth=0, alpha = -2.0, beta = 2.0):
     moves = [ move for move in game.getMoves(side, board, flags) ]
-    if len(moves) > 0 and ((not maxDepth) or maxDepth >= depth):
+    if len(moves) > 0 and ((maxDepth is None) or maxDepth >= depth):
         turnMult = 1 if side == 0 else -1
         value = None
         moveTree = {}

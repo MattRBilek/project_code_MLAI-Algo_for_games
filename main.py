@@ -5,13 +5,13 @@ if __name__ == "__main__":
         description     = 'mlai_algo', 
         formatter_class = argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('--player0', default = 'premade_algo.minimax',
+    parser.add_argument('--player0', default = 'exampleAlg',
                        type=str,
                        help='the first algorithm to run')
-    parser.add_argument('--player1', default = 'premade_algo.minimax',
+    parser.add_argument('--player1', default = 'exampleAlg',
                        type=str,
                        help='the second algorithm to run')
-    parser.add_argument('--game', default = 'tictactoe',
+    parser.add_argument('--game', default = 'two_snake',
                         type=str,
                         help = 'the game that we are playing')
     parser.add_argument('--fps', default = None,

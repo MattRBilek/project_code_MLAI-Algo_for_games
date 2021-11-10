@@ -29,14 +29,14 @@ class GameBoard:
         for i in range(COLUMN_COUNT):
             if board[ROW_COUNT-1][i] == 0:
                 moveArr.append(i);
-        print(moveArr)
+        ##print(moveArr)
         return moveArr
     def makeMove(move, turn, board, flags):
         newTurn = not turn
         newFlags = deepcopy(flags)
         newboard = deepcopy(board)
         moved = False;
-        print(move)
+        ##print(move)
         for i in range(ROW_COUNT):
             if newboard[i][move] == 0 and not moved:
                 newboard[i][move] = 1 if not turn else 2
@@ -82,10 +82,6 @@ class Game:
         if self.fps == 0:
             return;
         pygame.init()
-
-
-
-        
 
         self.screen = pygame.display.set_mode(size)
 
